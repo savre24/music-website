@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ category.name }} Albums{% endblock %}
+
+{% block content %}
+<style>
+    .album-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+        padding: 20px;
+        justify-content: center;
+    }
+
+    .album-card {
+        text-align: center;
+        background: white;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+    }
+
+    .album-card:hover {
+        transform: scale(1.05);
+    }
+
+    .album-card img {
+        width: 165px;
+        height: 220px;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+    .album-title {
+        margin-top: 10px;
+        font-weight: bold;
+        color: #333;
+    }
+</style>
+
+<h1 style="text-align: center; margin-bottom: 20px;">{{ category.name }} Albums</h1>
+
+<div class="album-grid">
+    {% for album in albums %}
+        <a href="{% url 'album_detail' album.id %}" class="album-card">
+            <img src="{{ album.cover_image.url }}" alt="{{ album.title }}">
+            <p class="album-title">{{ album.title }}</p>
+        </a>
+    {% empty %}
+        <p>No albums available in this category.</p>
+    {% endfor %}
+</div>
+{% endblock %}
+

@@ -1,0 +1,28 @@
+{% extends 'music/base.html' %}
+
+{% block content %}
+    <h2 class="mb-3">Upload Music</h2>
+
+    <form method="post" enctype="multipart/form-data" class="mb-4">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+
+    <h2>Uploaded Music</h2>
+    <ul class="list-group">
+        {% for music in music_files %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <strong>{{ music.title }}</strong> - {{ music.artist }}
+                    <br>
+                    <audio controls>
+                        <source src="{{ music.file.url }}" type="audio/mpeg">
+                    </audio>
+                </div>
+                <a href="{{ music.file.url }}" download class="btn btn-success btn-sm">Download</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+

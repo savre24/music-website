@@ -1,0 +1,80 @@
+/* Album Container */
+.album-container {
+    max-width: 800px;
+    margin: 20px auto;
+    text-align: center;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Album Cover */
+.album-cover {
+    max-width: 300px;
+    border-radius: 10px;
+}
+
+/* Album Title */
+.album-title {
+    font-size: 24px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Track Table */
+.track-table {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+.track-table th, .track-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Download Button */
+.download-btn {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.download-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .album-container {
+        width: 90%;
+    }
+
+    .track-table, .track-table thead, .track-table tbody, .track-table tr, .track-table td, .track-table th {
+        display: block;
+        width: 100%;
+    }
+
+    .track-table tr {
+        margin-bottom: 10px;
+        border-bottom: 2px solid #ddd;
+    }
+
+    .track-table td {
+        padding: 8px;
+        text-align: center;
+        border-bottom: none;
+    }
+
+    .track-table td:last-child {
+        border-bottom: 2px solid #ddd;
+    }
+}
+

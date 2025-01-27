@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% block title %}Music Albums{% endblock %}
+
+{% block content %}
+<style>
+    /* Category Grid */
+    .category-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+        padding: 20px;
+        justify-content: center;
+    }
+
+    .category-card {
+        text-align: center;
+        background: white;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+        text-decoration: none;
+        color: black;
+    }
+
+    .category-card:hover {
+        transform: scale(1.05);
+    }
+
+    .category-card img {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    .category-title {
+        margin-top: 10px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    /* Album Grid */
+    .album-grid {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr); /* 6 columns for desktop */
+        grid-template-rows: repeat(2, auto); /* 2 rows for desktop */
+        gap: 15px;
+        padding: 20px;
+        justify-content: center;
+    }
+
+    .album-card {
+        text-align: center;
+        background: white;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+    }
+
+    .album-card:hover {
+        transform: scale(1.05);
+    }
+
+    .album-card img {
+        width: 165px;
+        height: 220px;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+    .album-title {
+        margin-top: 10px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    /* Responsive: Switch to 3 rows × 2 columns on mobile */
+    @media (max-width: 768px) {
+        .album-grid {
+            grid-template-columns: repeat(2, 1fr); /* 2 columns for mobile */
+            grid-template-rows: repeat(3, auto); /* 3 rows for mobile */
+        }
+    }
+</style>
+
+<!-- Categories Section -->
+<h1 style="text-align: center; margin-bottom: 20px;">Categories</h1>
+<div class="category-grid">
+    {% for category in categories %}
+        <a href="{% url 'category_detail' category.id %}" class="category-card">
+            {% if category.image %}
+                <img src="{{ category.image.url }}" alt="{{ category.name }}">
+            {% else %}
+                <img src="/static/default-category.png" alt="Default Category"> <!-- Use default image if none exists -->
+            {% endif %}
+            <p class="category-title">{{ category.name }}</p>
+        </a>
+    {% empty %}
+        <p>No categories available.</p>
+    {% endfor %}
+</div>
+
+<!-- Albums Section -->
+<h1 style="text-align: center; margin-bottom: 20px;">Albums</h1>
+<div class="album-grid">
+    {% for album in albums %}
+        <a href="{% url 'album_detail' album.id %}" class="album-card">
+            <img src="{{ album.cover_image.url }}" alt="{{ album.title }}">
+            <p class="album-title">{{ album.title }}</p>
+        </a>
+    {% empty %}
+        <p>No albums available.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+<div class="category-grid">
+    {% for category in categories %}
+        <a href="{% url 'category_detail' category.id %}" class="category-card">
+            {% if category.image %}
+                <img src="{{ category.image.url }}" alt="{{ category.name }}">
+            {% else %}
+                <img src="/static/default-category.png" alt="Default Category">
+            {% endif %}
+            <p class="category-title">{{ category.name }}</p>
+        </a>
+    {% empty %}
+        <p>No categories available.</p>
+    {% endfor %}
+</div>

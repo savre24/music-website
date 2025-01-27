@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ album.title }}</title>
+</head>
+<body>
+
+    <h1>{{ album.title }}</h1>
+    {% if album.cover_image %}
+        <img src="{{ album.cover_image.url }}" alt="{{ album.title }}" style="width: 300px;">
+    {% endif %}
+
+    <h2>Tracks</h2>
+    <ul>
+        {% for track in album.tracks.all %}
+            <li>
+                <strong>{{ track.title }}</strong> - {{ track.artist }}
+                <audio controls>
+                    <source src="{{ track.file.url }}" type="audio/mpeg">
+                </audio>
+            </li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
