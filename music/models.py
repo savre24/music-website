@@ -29,7 +29,7 @@ class Album(models.Model):
         """Extracts ZIP file and creates Music objects for each MP3 inside."""
         if self.zip_file:
             zip_path = self.zip_file.path
-            album_folder = f"music_files/{slugify(self.title)}/"  # Use slugified title for folder name
+            album_folder = f"music_files/{slugify(self.title)}/"
 
             # Ensure the album folder exists
             if not default_storage.exists(album_folder):
@@ -79,21 +79,6 @@ class Music(models.Model):
 
 
 class AdSettings(models.Model):
-    """Model to store Google AdSense code dynamically"""
-    header_ad = models.TextField(blank=True, null=True, help_text="AdSense code for Header")
-    footer_ad = models.TextField(blank=True, null=True, help_text="AdSense code for Footer")
-    between_tracks_ad = models.TextField(blank=True, null=True, help_text="AdSense code between tracks")  # New field
-
-    def __str__(self):
-        return "Google AdSense Settings"
-    
-    class Meta:
-        verbose_name = "AdSense Setting"
-        verbose_name_plural = "AdSense Settings"
-
-from django.db import models
-
-class AdSettings(models.Model):
     """Model to store Google AdSense codes dynamically"""
     header_ad = models.TextField(blank=True, null=True, help_text="AdSense code for Header")
     footer_ad = models.TextField(blank=True, null=True, help_text="AdSense code for Footer")
@@ -105,3 +90,4 @@ class AdSettings(models.Model):
     class Meta:
         verbose_name = "AdSense Setting"
         verbose_name_plural = "AdSense Settings"
+
